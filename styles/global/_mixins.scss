@@ -20,3 +20,9 @@
     #{$attribute}-bottom: $offsetMain * $size;
   }
 }
+
+@mixin tablet-small {
+  @media (max-width: 900px) {
+    @content;
+  }
+}
