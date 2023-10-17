@@ -1,0 +1,22 @@
+@use "sass:math";
+@import "constants";
+
+@mixin spacer($attribute, $direction: all, $size: 1) {
+  @if $direction == all {
+    #{$attribute}: $offsetMain * $size;
+  } @else if $direction == l {
+    #{$attribute}-left: $offsetMain * $size;
+  } @else if $direction == r {
+    #{$attribute}-right: $offsetMain * $size;
+  } @else if $direction == t {
+    #{$attribute}-top: $offsetMain * $size;
+  } @else if $direction == b {
+    #{$attribute}-bottom: $offsetMain * $size;
+  } @else if $direction == x {
+    #{$attribute}-left: $offsetMain * $size;
+    #{$attribute}-right: $offsetMain * $size;
+  } @else if $direction == y {
+    #{$attribute}-top: $offsetMain * $size;
+    #{$attribute}-bottom: $offsetMain * $size;
+  }
+}

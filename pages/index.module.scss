@@ -1,0 +1,10 @@
+@import "@/styles/global/mixins";
+
+.body {
+  font-family: "Roboto Condensed";
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  @include spacer(padding, t, 8);
+}
