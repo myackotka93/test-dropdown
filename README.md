@@ -2,6 +2,8 @@
 
 FilterForm is a React component that provides a dropdown with filter options and checkboxes. Users can select options from different tabs and see the selected items in a list.
 
+deploy: https://test-dropdown.vercel.app/
+
 ## Technologies
 
 - **React/Next.js**: 
