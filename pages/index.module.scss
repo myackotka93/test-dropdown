@@ -7,4 +7,5 @@
   display: flex;
   justify-content: center;
   @include spacer(padding, t, 8);
+  background-color: #e9e9e9;
 }
