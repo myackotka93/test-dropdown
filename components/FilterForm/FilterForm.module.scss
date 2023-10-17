@@ -120,6 +120,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    padding-top: 3px;
   }
   
   .item_checkbox:checked {
@@ -127,8 +128,9 @@
   }
   
   .item_checkbox:checked::before {
-    content: url('/images/chackbox.svg');
+    content: url('/images/checkbox.svg');
     display: block;
+    
   }
 }
   
