@@ -4,9 +4,9 @@ import classNames from 'classnames'
 import styles from './FilterForm.module.scss';
 
 const tabsData = [
-  { label: 'ЖК', items: ['Академический', 'Басманный', 'Замоскворечье', 'Измайлово', 'Басманный', 'Академический','Басманный', 'Академический'] },
-  { label: 'Округ', items: ['Центральный', 'Зеленоградский', 'Восточный', 'Западный', 'Южный', 'Северный', 'Южный', 'Северный'] },
-  { label: 'Район', items: ['Арбат', 'Аэропорт', 'Бабушкинский', 'Внуково', 'Гагаринский', 'Коньково', 'Бабушкинский', 'Внуково'] },
+  { label: 'ЖК', items: ['Академический', 'Басманный', 'Замоскворечье', 'Измайлово', 'Парус', 'Алые паруса','Дом на набережной', 'Воробьевы горы'] },
+  { label: 'Округ', items: ['Центральный', 'Зеленоградский', 'Восточный', 'Западный', 'Южный', 'Северный', 'Северо-Западный', 'Юго-Восточный'] },
+  { label: 'Район', items: ['Арбат', 'Аэропорт', 'Бабушкинский', 'Внуково', 'Гагаринский', 'Коньково', 'Чертаново', 'Люберцы'] },
   { label: 'Метро', items: ['Третьяковская', 'Чертаново', 'Академическая', 'Шуваловская', 'Теплый стан', 'Ясенево', 'Измайлово'] },
 ];
 
@@ -29,6 +29,7 @@ export default function FilterForm() {
   const handleCheckboxChange = (tabIndex, itemIndex) => {
     const updatedStates = [...checkboxStates];
     updatedStates[tabIndex][itemIndex] = !updatedStates[tabIndex][itemIndex];
+    console.log(updatedStates);
     setCheckboxStates(updatedStates);
 
     if (updatedStates[tabIndex][itemIndex]) {
@@ -63,6 +64,7 @@ export default function FilterForm() {
     <>
       <div className={styles.body}>
         <div className={styles.container}>
+          <div>Локация</div>
           <button className={styles.button} onClick={toggleDropdown}>
             <div className={styles.button_title}>
               <svg className={styles.button_icon} width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
