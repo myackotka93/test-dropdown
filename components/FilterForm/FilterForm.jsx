@@ -3,18 +3,11 @@ import classNames from 'classnames'
 
 import styles from './FilterForm.module.scss';
 
-const tabsData = [
-  { label: 'ЖК', items: ['Академический', 'Басманный', 'Замоскворечье', 'Измайлово', 'Парус', 'Алые паруса','Дом на набережной', 'Воробьевы горы'] },
-  { label: 'Округ', items: ['Центральный', 'Зеленоградский', 'Восточный', 'Западный', 'Южный', 'Северный', 'Северо-Западный', 'Юго-Восточный'] },
-  { label: 'Район', items: ['Арбат', 'Аэропорт', 'Бабушкинский', 'Внуково', 'Гагаринский', 'Коньково', 'Чертаново', 'Люберцы'] },
-  { label: 'Метро', items: ['Третьяковская', 'Чертаново', 'Академическая', 'Шуваловская', 'Теплый стан', 'Ясенево', 'Измайлово'] },
-];
-
-export default function FilterForm() {
+export default function FilterForm( { data } ) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [activeTabIndex, setActiveTabIndex] = useState(0);
   const [checkboxStates, setCheckboxStates] = useState(
-    tabsData.map((tab) => new Array(tab.items.length).fill(false))
+    data.map((tab) => new Array(tab.items.length).fill(false))
   );
   const [activeItems, setActiveItems] = useState([]);
 
@@ -33,9 +26,9 @@ export default function FilterForm() {
     setCheckboxStates(updatedStates);
 
     if (updatedStates[tabIndex][itemIndex]) {
-      setActiveItems((prevItems) => [...prevItems, tabsData[tabIndex].items[itemIndex]]);
+      setActiveItems((prevItems) => [...prevItems, data[tabIndex].items[itemIndex]]);
     } else {
-      setActiveItems((prevItems) => prevItems.filter((item) => item !== tabsData[tabIndex].items[itemIndex]));
+      setActiveItems((prevItems) => prevItems.filter((item) => item !== data[tabIndex].items[itemIndex]));
     }
   };
 
@@ -43,7 +36,7 @@ export default function FilterForm() {
     setActiveItems((prevItems) => prevItems.filter((activeItem) => activeItem !== item));
 
     const updatedStates = [...checkboxStates];
-    tabsData.forEach((tab, tabIndex) => {
+    data.forEach((tab, tabIndex) => {
       const itemIndex = tab.items.indexOf(item);
       if (itemIndex !== -1) {
         updatedStates[tabIndex][itemIndex] = false;
@@ -80,7 +73,7 @@ export default function FilterForm() {
           {isDropdownOpen && (
             <div className={styles.dropdown}>
               <div className={styles.tabs}>
-                {tabsData.map((tab, index) => (
+                {data.map((tab, index) => (
                   <div
                     key={index}
                     className={classNames(styles.tab, { [styles.active_tab]: activeTabIndex === index })}
@@ -106,7 +99,7 @@ export default function FilterForm() {
               )}
 
               <ul className={styles.list}>
-                {tabsData[activeTabIndex].items.map((item, itemIndex) => (
+                {data[activeTabIndex].items.map((item, itemIndex) => (
                   <li key={itemIndex} className={styles.item}>
                     <label className={styles.item_label} htmlFor={`checkbox-${activeTabIndex}-${itemIndex}`}>
                       <span className={styles.item_text}>{item}</span>
