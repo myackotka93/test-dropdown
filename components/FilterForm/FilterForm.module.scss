@@ -172,8 +172,8 @@
   @include spacer(padding, x, 1 / 2);
   border-bottom: 1px solid var(--stroke-grey, #E3E6E8);
   overflow: hidden;
-  overflow-x: auto;
-  width: 100%;
+  // overflow-x: auto;
+  // width: 100%;
 
   .active_item {
     border: 1px solid var(--border-primary, rgba(7, 0, 15, 0.10));
