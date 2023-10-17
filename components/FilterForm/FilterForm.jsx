@@ -22,7 +22,6 @@ export default function FilterForm( { data } ) {
   const handleCheckboxChange = (tabIndex, itemIndex) => {
     const updatedStates = [...checkboxStates];
     updatedStates[tabIndex][itemIndex] = !updatedStates[tabIndex][itemIndex];
-    console.log(updatedStates);
     setCheckboxStates(updatedStates);
 
     if (updatedStates[tabIndex][itemIndex]) {
