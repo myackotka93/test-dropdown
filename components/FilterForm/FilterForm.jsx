@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import classNames from 'classnames'
 
 import styles from './FilterForm.module.scss';
@@ -10,6 +10,16 @@ export default function FilterForm( { data } ) {
     data.map((tab) => new Array(tab.items.length).fill(false))
   );
   const [activeItems, setActiveItems] = useState([]);
+  const [hideVignette, setHideVignette] = useState(false);
+
+  const handleScroll = (e) => {
+    const element = e.target;
+    if (element.scrollHeight - element.scrollTop === element.clientHeight) {
+      setHideVignette(true);
+    } else {
+      setHideVignette(false);
+    }
+  };
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -51,6 +61,24 @@ export default function FilterForm( { data } ) {
     });
     return totalActive;
   };
+
+  useEffect(() => {
+    const handleBodyClick = (e) => {
+      const dropdown = document.querySelector(`.${styles.dropdown}`);
+      const button = document.querySelector(`.${styles.button}`);
+      if (isDropdownOpen && dropdown && button) {
+        if (!dropdown.contains(e.target) && !button.contains(e.target)) {
+          setIsDropdownOpen(false);
+        }
+      }
+    };
+  
+    document.body.addEventListener('click', handleBodyClick);
+  
+    return () => {
+      document.body.removeEventListener('click', handleBodyClick);
+    };
+  }, [isDropdownOpen]);
 
   return (
     <>
@@ -97,7 +125,7 @@ export default function FilterForm( { data } ) {
                 </div>
               )}
 
-              <ul className={styles.list}>
+              <ul className={styles.list} onScroll={handleScroll}>
                 {data[activeTabIndex].items.map((item, itemIndex) => (
                   <li key={itemIndex} className={styles.item}>
                     <label className={styles.item_label} htmlFor={`checkbox-${activeTabIndex}-${itemIndex}`}>
@@ -113,7 +141,7 @@ export default function FilterForm( { data } ) {
                   </li>
                 ))}
               </ul>
-              <div className={styles.vignette}></div>
+              {!hideVignette && <div className={styles.vignette}></div>}
             </div>
           )}
         </div>

@@ -103,12 +103,10 @@
 
   &:hover {
     background-color: var(--hover-primary, rgba(7, 0, 15, 0.10));
-  }
 
-  &:last-child {
-    @include spacer(padding, t, 1 / 4);
-    @include spacer(padding, b, 1 );
-    height: auto;
+    &:last-child {
+      border-radius: 0 0 10px 10px;
+    }
   }
 
   .item_label {
@@ -157,6 +155,11 @@
       color: var(--text-tertiary, rgba(7, 0, 15, 0.40));
       @include spacer(margin,r, 1 / 2);
       cursor: pointer;
+      transition: color 0.3s ease-in-out;
+
+      &:hover {
+        color: var(--text-primary, #07000F);
+      }
     }
 
     .active_tab {
@@ -171,9 +174,8 @@
   align-items: center;
   @include spacer(padding, x, 1 / 2);
   border-bottom: 1px solid var(--stroke-grey, #E3E6E8);
-  overflow: hidden;
-  // overflow-x: auto;
-  // width: 100%;
+  overflow-x: auto;
+  width: 100%;
 
   .active_item {
     border: 1px solid var(--border-primary, rgba(7, 0, 15, 0.10));
@@ -190,6 +192,23 @@
     .remove_button {
       @include spacer(margin, l, 1 / 4);
     }
+  }
+
+  &::-webkit-scrollbar {
+    width: 50%;
+    height: 2px;
+    cursor: grab;
+    margin-right: 5px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgb(0, 0, 0);
+    border-radius: 100px;
+    @include spacer(padding, r, 1 / 2);
   }
 }
   
@@ -208,12 +227,12 @@
   @include spacer(padding, r, 1 / 2);
 }
 
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
+@keyframes fadeIn {
+  from {
+    opacity: 0;
   }
+  to {
+    opacity: 1;
+  }
+}
   
