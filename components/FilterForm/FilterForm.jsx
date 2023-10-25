@@ -1,4 +1,7 @@
 import { useState, useEffect } from 'react'
+import DropdownTabs from '../DropdownTabs/DropdownTabs';
+import ActiveItems from '../ActiveItems/ActiveItems';
+import DropdownList from '../DropdownList/DropdownList';
 import classNames from 'classnames'
 
 import styles from './FilterForm.module.scss';
@@ -99,48 +102,18 @@ export default function FilterForm( { data } ) {
           </button>
           {isDropdownOpen && (
             <div className={styles.dropdown}>
-              <div className={styles.tabs}>
-                {data.map((tab, index) => (
-                  <div
-                    key={index}
-                    className={classNames(styles.tab, { [styles.active_tab]: activeTabIndex === index })}
-                    onClick={() => handleTabClick(index)}
-                  >
-                    {tab.label}
-                  </div>
-                ))}
-              </div>
+              <DropdownTabs data={data} activeTabIndex={activeTabIndex} handleTabClick={handleTabClick} />
               {activeItems.length > 0 && (
-                <div className={styles.active_items}>
-                  {activeItems.map((item, index) => (
-                    <div key={index} className={styles.active_item}>
-                      {item}
-                      <button className={styles.remove_button} onClick={() => handleRemoveItem(item)}>
-                        <svg width="12" height="10" viewBox="0 0 12 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M1.91235 1L9.91276 9.0004M10.0843 1L2.08392 9.0004" stroke="#07000F" strokeOpacity="0.4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                        </svg>
-                      </button>
-                    </div>
-                  ))}
-                </div>
+                <ActiveItems activeItems={activeItems} handleRemoveItem={handleRemoveItem} />
               )}
 
-              <ul className={styles.list} onScroll={handleScroll}>
-                {data[activeTabIndex].items.map((item, itemIndex) => (
-                  <li key={itemIndex} className={styles.item}>
-                    <label className={styles.item_label} htmlFor={`checkbox-${activeTabIndex}-${itemIndex}`}>
-                      <span className={styles.item_text}>{item}</span>
-                      <input type="checkbox"
-                             id={`checkbox-${activeTabIndex}-${itemIndex}`}
-                             name="filterRadio" 
-                             className={styles.item_checkbox}
-                             checked={checkboxStates[activeTabIndex][itemIndex]}
-                             onChange={() => handleCheckboxChange(activeTabIndex, itemIndex)}
-                      />
-                    </label>
-                  </li>
-                ))}
-              </ul>
+              <DropdownList
+                data={data}
+                activeTabIndex={activeTabIndex}
+                checkboxStates={checkboxStates}
+                handleCheckboxChange={handleCheckboxChange}
+                handleScroll={handleScroll}
+              />
               {!hideVignette && <div className={styles.vignette}></div>}
             </div>
           )}
